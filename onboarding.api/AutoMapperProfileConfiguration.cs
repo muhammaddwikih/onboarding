@@ -1,5 +1,6 @@
 ﻿using AutoMapper;
 using onboarding.api.Movie.DTO;
+using onboarding.api.Nation.DTO;
 using onboarding.dal.Model;
 using System;
 using System.Collections.Generic;
@@ -14,7 +15,9 @@ namespace onboarding.api
         {
             CreateMap<MovieDTO, MovieModel>();
             CreateMap<MovieModel, MovieDTO>();
-            //Source    //destination
+            CreateMap<National, NationDTO>();
+            CreateMap<NationDTO, National>();
+                      //Source    //destination
             CreateMap<MovieModel, MovieWithNationalDTO>();
                 
             /*CreateMap<MovieWithNationalDTO, MovieModel>()

@@ -14,6 +14,6 @@ namespace onboarding.api.Nation.DTO
     }
     public class NationWithMovieDTO : NationDTO
     {
-        public MovieDTO Movie { get; set; }
+        public List<MovieDTO> Movie { get; set; }
     }
 }
