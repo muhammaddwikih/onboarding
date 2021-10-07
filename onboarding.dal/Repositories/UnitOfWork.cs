@@ -9,13 +9,13 @@ namespace onboarding.dal.Repositories
 {
     public class UnitOfWork : IDisposable, IUnitOfWork
     {
-        private readonly OnBoardingAiDbContext dbContext;
+        private readonly DwikiDbContext dbContext;
 
         public IBaseRepository<MovieModel> MovieRepository { get; set; }
 
         public IBaseRepository<National> NationalRepository { get; set; }
 
-        public UnitOfWork(OnBoardingAiDbContext context)
+        public UnitOfWork(DwikiDbContext context)
         {
             dbContext = context;
 

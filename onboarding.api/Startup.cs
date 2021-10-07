@@ -9,8 +9,13 @@ using Microsoft.Extensions.Hosting;
 using Microsoft.Extensions.Logging;
 using Microsoft.OpenApi.Models;
 using onboarding.bll;
+using onboarding.bll.Cache;
+using onboarding.bll.Kafka;
 using onboarding.dal;
 using onboarding.dal.Repositories;
+using onboarding.Scheduler;
+using onboarding.Scheduler.Job;
+using Quartz.Spi;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -33,10 +38,11 @@ namespace onboarding.api
         {
             services.AddControllers();
 
-            services.AddDbContext<OnBoardingAiDbContext>(options =>
+            services.AddDbContext<DwikiDbContext>(options =>
               options
                 .UseSqlServer(Configuration.GetConnectionString("DefaultConnection")));
 
+            services.AddScoped<IRedisService, RedisService>();
             services.AddScoped<IUnitOfWork, UnitOfWork>();
 
             services.AddSwaggerGen(c =>
@@ -46,8 +52,17 @@ namespace onboarding.api
 
             services.AddTransient<MovieService>();
 
+            services.AddTransient<NationService>();
+
             services.AddAutoMapper(typeof(AutoMapperProfileConfiguration));
-            
+
+            services.AddSingleton<IkafkaSender, KafkaSender>();
+            services.AddSingleton<IJobFactory, QuartzJobFactory>();
+
+            services.AddHostedService<SchedulerService>();
+
+            services.AddTransient<LogTimeJob>();
+
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
@@ -74,6 +89,7 @@ namespace onboarding.api
             {
                 c.SwaggerEndpoint("/swagger/v1/swagger.json", "Tutorial Net Core v1");
             });
+
         }
     }
 }

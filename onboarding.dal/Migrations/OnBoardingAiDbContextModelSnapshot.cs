@@ -8,7 +8,7 @@ using onboarding.dal;
 
 namespace onboarding.dal.Migrations
 {
-    [DbContext(typeof(OnBoardingAiDbContext))]
+    [DbContext(typeof(DwikiDbContext))]
     partial class OnBoardingAiDbContextModelSnapshot : ModelSnapshot
     {
         protected override void BuildModel(ModelBuilder modelBuilder)

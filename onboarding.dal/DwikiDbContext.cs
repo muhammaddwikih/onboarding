@@ -4,9 +4,9 @@ using System;
 
 namespace onboarding.dal
 {
-    public class OnBoardingAiDbContext : DbContext
+    public class DwikiDbContext : DbContext
     {
-        public OnBoardingAiDbContext(DbContextOptions<OnBoardingAiDbContext> options) : base(options) { }
+        public DwikiDbContext(DbContextOptions<DwikiDbContext> options) : base(options) { }
 
         protected override void OnModelCreating(ModelBuilder builder)
         {

@@ -9,7 +9,7 @@ using onboarding.dal;
 
 namespace onboarding.dal.Migrations
 {
-    [DbContext(typeof(OnBoardingAiDbContext))]
+    [DbContext(typeof(DwikiDbContext))]
     [Migration("20211004094109_init")]
     partial class init
     {

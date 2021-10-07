@@ -15,14 +15,20 @@ namespace onboarding.api
         {
             CreateMap<MovieDTO, MovieModel>();
             CreateMap<MovieModel, MovieDTO>();
+            
             CreateMap<National, NationDTO>();
             CreateMap<NationDTO, National>();
                       //Source    //destination
             CreateMap<MovieModel, MovieWithNationalDTO>();
-                
-            /*CreateMap<MovieWithNationalDTO, MovieModel>()
+
+            CreateMap<MovieWithNationalDTO, MovieModel>()
                 .ForMember(dest => dest.NationalId, opt => opt.MapFrom(x => x.Nation.Id))
-                .ForMember(dest => dest.Nation.NationName, opt => opt.MapFrom(x => x.Nation.NationName));*/
+                .ForMember(dest => dest.Nation, opt => opt.Ignore());
+
+            CreateMap<National, NationWithMovieDTO>();
+
+            CreateMap<NationWithMovieDTO, National>()
+                .ForMember(dest => dest.Movie, opt => opt.Ignore());
         }
     }
 }

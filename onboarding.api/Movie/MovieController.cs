@@ -47,35 +47,45 @@ namespace onboarding.api.Movie
         [ProducesResponseType(typeof(string), 400)]
         public ActionResult GetAllMovie()
         {
-            /*_movieService = new MovieService();*/
-
             var movie = _movieService.GetAll();
             var mapperResult = _mapper.Map<List<MovieWithNationalDTO>>(movie);
             return new OkObjectResult(mapperResult);
         }
 
         // GET api/<MovieController>/5
-        [HttpGet("{id}")]
-        public string Get(int id)
+        [HttpGet]
+        [Route("{imdbId}")]
+        [ProducesResponseType(typeof(MovieDTO), 200)]
+        [ProducesResponseType(typeof(string), 400)]
+        public ActionResult GetMovieById(int imdbId)
         {
-            return "value";
+            MovieModel movie = _movieService.GetMovieById(imdbId);
+            var mapperResult = _mapper.Map<MovieDTO>(movie);
+            return new OkObjectResult(mapperResult);
         }
 
         // POST api/<MovieController>
         [HttpPost]
         [Route("")]
-        [ProducesResponseType(typeof(List<MovieWithNationalDTO>), 200)]
+        [ProducesResponseType(typeof(MovieModel), 200)]
         [ProducesResponseType(typeof(string), 400)]
-        public ActionResult CreateMovie([FromBody] MovieModel value)
+        public async Task<ActionResult> CreateMovie([FromBody] MovieModel value)
         {
-            _movieService.CreateMovie(value);
-            return new OkResult();
+            await _movieService.CreateMovie(value);
+            /*var mapperResult = _mapper.Map<MovieDTO>(value);*/
+            return new OkObjectResult(value);
         }
 
         // PUT api/<MovieController>/5
-        [HttpPut("{id}")]
-        public void Put(int id, [FromBody] string value)
+        [HttpPut]
+        [Route("{id}")]
+        [ProducesResponseType(typeof(MovieModel), 200)]
+        [ProducesResponseType(typeof(string), 400)]
+        public ActionResult EditMovie([FromRoute] Guid id, [FromBody] MovieModel movie)
         {
+            _movieService.EditMovie(id, movie);
+            
+            return new OkObjectResult(movie);
         }
 
         // DELETE api/<MovieController>/5
