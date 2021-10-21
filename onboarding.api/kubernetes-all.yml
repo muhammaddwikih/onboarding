@@ -1,0 +1,64 @@
+﻿apiVersion: apps/v1
+kind: Deployment
+metadata:
+  labels:
+      app: ob-net-core-tutorial
+  name: ob-net-core-tutorial
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+        app: ob-net-core-tutorial
+  strategy:
+    rollingUpdate:
+        maxSurge: 1
+        maxUnavailable: 1
+    type: RollingUpdate
+  template:
+    metadata:
+      labels:
+          app: ob-net-core-tutorial
+      name: ob-net-core-tutorial
+    spec:
+      containers:
+        - name: ob-net-core-tutorial
+          image: onboardskd.azurecr.io/ob-net-core-tutorial:latest
+          imagePullPolicy: Always
+          env:
+            - name: ConnectionStrings__DefaultConnection
+              valueFrom:
+                secretKeyRef:
+                  name: sql-server-yahya
+                  key: on-boarding-skd-db
+            - name: AuthorizationServer__Address
+              valueFrom:
+                configMapKeyRef:
+                  name: config-yahya
+                  key: AuthorizationServerAddress
+          ports:
+          - containerPort: 80
+          resources:
+            requests:
+                cpu: 100m
+                memory: 128Mi
+            limits:
+                cpu: 125m
+                memory: 256Mi
+      restartPolicy: Always
+      serviceAccountName: ""
+status: {}
+---
+apiVersion: v1
+kind: Service
+metadata:
+  labels:
+    app: ob-net-core-tutorial
+  name: ob-net-core-tutorial
+spec:
+  ports:
+  - port: 80
+  type: LoadBalancer
+  selector:
+    app: ob-net-core-tutorial
+status:
+  loadBalancer: {}

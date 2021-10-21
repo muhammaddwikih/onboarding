@@ -1,6 +1,8 @@
 ﻿using AutoMapper;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using onboarding.api.Nation.DTO;
+using onboarding.api.Security;
 using onboarding.bll;
 using onboarding.dal.Model;
 using System;
@@ -44,6 +46,7 @@ namespace onboarding.api.Nation
         [Route("{name}")]
         [ProducesResponseType(typeof(List<NationWithMovieDTO>), 200)]
         [ProducesResponseType(typeof(string), 400)]
+        [Authorize]
         public async Task<ActionResult> GetByName([FromRoute] string name)
         {
             National nation = await _nationService.GetByName(name);
@@ -60,6 +63,7 @@ namespace onboarding.api.Nation
         [Route("")]
         [ProducesResponseType(typeof(National), 200)]
         [ProducesResponseType(typeof(string), 400)]
+        [AuthorizedByRole("admin")]
         public ActionResult Post([FromBody] NationDTO value)
         {
             var mapperResult = _mapper.Map<National>(value);

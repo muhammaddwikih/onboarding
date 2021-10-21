@@ -11,7 +11,9 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "onboarding.dal", "onboardin
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Scheduler", "Scheduler\Scheduler.csproj", "{BAC2C7F5-F20E-4F3D-A80B-766750166A6C}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "External", "External\External.csproj", "{4461E93D-A929-46D1-9211-5329304C628D}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "External", "External\External.csproj", "{4461E93D-A929-46D1-9211-5329304C628D}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "onboarding.bll.Test", "onboarding.bll.Test\onboarding.bll.Test.csproj", "{CDDBBB45-3CA9-4EC7-AC29-705F2BB4720D}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -39,6 +41,10 @@ Global
 		{4461E93D-A929-46D1-9211-5329304C628D}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{4461E93D-A929-46D1-9211-5329304C628D}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{4461E93D-A929-46D1-9211-5329304C628D}.Release|Any CPU.Build.0 = Release|Any CPU
+		{CDDBBB45-3CA9-4EC7-AC29-705F2BB4720D}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{CDDBBB45-3CA9-4EC7-AC29-705F2BB4720D}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{CDDBBB45-3CA9-4EC7-AC29-705F2BB4720D}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{CDDBBB45-3CA9-4EC7-AC29-705F2BB4720D}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

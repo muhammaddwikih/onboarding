@@ -92,9 +92,9 @@ namespace onboarding.api.Movie
         [HttpDelete]
         [Route("{title}")]
         [ProducesResponseType(typeof(MovieDTO), 200)]
-        public ActionResult Delete([FromRoute] string title)
+        public async Task<ActionResult> Delete([FromRoute] string title)
         {
-            _movieService.DeleteMovie(title);
+            await _movieService.DeleteMovie(title);
             return new OkResult();
         }
     }

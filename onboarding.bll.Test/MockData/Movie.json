@@ -1,0 +1,32 @@
+[
+  {
+    "id": "49CB0862-E990-4209-0667-08D9893984D7",
+    "nation": {
+      "id": "007957c3-1b7a-11ec-840c-d45d646e1fa9",
+      "nationName": "USA"
+    },
+    "title": "stringEdit",
+    "genre": "stringEdit",
+    "imdbId": 2
+  },
+  {
+    "id": "F4E349BF-3B34-4D73-CBF1-08D9898A04FA",
+    "nation": {
+      "id": "85780e7e-b31a-48ea-a3d7-08d9896a04a3",
+      "nationName": "Indonesia"
+    },
+    "title": "kafka",
+    "genre": "kafka",
+    "imdbId": 3
+  },
+  {
+    "id": "93084830-533F-4CCD-8B73-08D9898ACA05",
+    "nation": {
+      "id": "85780e7e-b31a-48ea-a3d7-08d9896a04a3",
+      "nationName": "Indonesia"
+    },
+    "title": "kaftaTest",
+    "genre": "kafkaTest",
+    "imdbId": 5
+  }
+]
