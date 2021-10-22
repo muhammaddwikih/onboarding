@@ -3,4 +3,4 @@ kind: ConfigMap
 metadata:
   name: map-dwiki
 data:
-  ob-core-config: 
+  ob-core-config: http://20.44.226.17:80
