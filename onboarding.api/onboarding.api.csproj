@@ -28,6 +28,7 @@
   </ItemGroup>
 
   <ItemGroup>
+    <ProjectReference Include="..\External\onboarding.external.csproj" />
     <ProjectReference Include="..\onboarding.bll\onboarding.bll.csproj" />
     <ProjectReference Include="..\Scheduler\onboarding.scheduler.csproj" />
   </ItemGroup>
