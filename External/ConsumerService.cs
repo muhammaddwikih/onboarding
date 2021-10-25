@@ -20,7 +20,7 @@ namespace External
         private CancellationTokenSource _cancellationTokenSource;
         private readonly ILogger _logger;
         private readonly MovieConsumerService _movieConsumer;
-
+         
         public ConsumerService(IConfiguration config, ILogger<ConsumerService> logger)
         {
             _logger = logger;
