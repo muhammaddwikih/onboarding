@@ -10,8 +10,8 @@ COPY onboarding.api/*.csproj ./onboarding.api/
 COPY onboarding.bll/*.csproj ./onboarding.bll/
 COPY onboarding.bll.Test/*.csproj ./onboarding.bll.Test/
 COPY onboarding.dal/*.csproj ./onboarding.dal/
-COPY External/*.csproj ./External/
-COPY Scheduler/*.csproj ./Scheduler/
+COPY onboarding.External/*.csproj ./External/
+COPY onboarding.scheduler/*.csproj ./Scheduler/
 
 #restore dependencies
 RUN dotnet restore
