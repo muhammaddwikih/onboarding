@@ -29,7 +29,7 @@
 
   <ItemGroup>
     <ProjectReference Include="..\onboarding.bll\onboarding.bll.csproj" />
-    <ProjectReference Include="..\Scheduler\Scheduler.csproj" />
+    <ProjectReference Include="..\Scheduler\onboarding.scheduler.csproj" />
   </ItemGroup>
 
 

@@ -22,6 +22,7 @@ namespace onboarding.bll.Test
         private Mock<IkafkaSender> kafka;
         private Mock<IUnitOfWork> uow;
         private IEnumerable<National> national;
+        private IConfiguration config;
 
         public MovieServiceTest()
         {
@@ -29,17 +30,11 @@ namespace onboarding.bll.Test
             national = CommonHelper.LoadDataFromFile<IEnumerable<National>>(@"MockData\National.json");
             uow = MockUnitOfWork();
             kafka = MockKafka();
-            
         }
-
-        /*private Mock<IConfiguration> MockConfig()
-        {
-            throw new NotImplementedException();
-        }*/
 
         private MovieService CreateMovieService()
         {
-            return new MovieService(uow.Object, kafka.Object);
+            return new MovieService(uow.Object, kafka.Object, config);
         }
 
         private Mock<IkafkaSender> MockKafka()
@@ -147,7 +142,7 @@ namespace onboarding.bll.Test
 
         [Theory]
         [InlineData("49CB0862-E990-4209-0667-08D9893984D7", "TitleEdit", "GenreEdit")]
-        public void EditMovieTest(string id, string title, string genre)
+        public async Task EditMovieTest_Success(string id, string title, string genre)
         {
             var expected = new MovieModel
             {
@@ -159,9 +154,31 @@ namespace onboarding.bll.Test
 
             var svc = CreateMovieService();
 
-            var actual = svc.EditMovie(Guid.Parse(id), expected);
+            Func<Task> act = async () => { await svc.EditMovie(Guid.Parse(id), expected); };
 
+            await act.Should().NotThrowAsync<Exception>();
             uow.Verify(x => x.SaveAsync(It.IsAny<CancellationToken>()), Times.AtLeastOnce);
+        }
+
+        [Theory]
+        [InlineData("49CB0862-E990-4209-0667-08D9893984D8", "TitleEdit", "GenreEdit")]
+        public async Task EditMovieTest_NotFoundAsync(string id, string title, string genre)
+        {
+            //arrange
+            var expected = new MovieModel
+            {
+                Id = Guid.Parse(id),
+                Title = title,
+                Genre = genre,
+                NationalId = Guid.Parse("007957c3-1b7a-11ec-840c-d45d646e1fa9")
+            };
+
+            var svc = CreateMovieService();
+            //act
+            Func<Task> act = async () => { await svc.EditMovie(Guid.Parse(id), expected); };
+
+            //assert
+            await act.Should().ThrowAsync<Exception>().WithMessage($"Movie with {id} not found");
         }
 
         [Theory]

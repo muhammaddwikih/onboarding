@@ -81,9 +81,9 @@ namespace onboarding.api.Movie
         [Route("{id}")]
         [ProducesResponseType(typeof(MovieModel), 200)]
         [ProducesResponseType(typeof(string), 400)]
-        public ActionResult EditMovie([FromRoute] Guid id, [FromBody] MovieModel movie)
+        public async Task<ActionResult> EditMovie([FromRoute] Guid id, [FromBody] MovieModel movie)
         {
-            _movieService.EditMovie(id, movie);
+            await _movieService.EditMovie(id, movie);
             
             return new OkObjectResult(movie);
         }

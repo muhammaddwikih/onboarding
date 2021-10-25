@@ -18,10 +18,10 @@ namespace onboarding.bll
         private readonly IConfiguration _config;
         private readonly IkafkaSender _kafkaSender;
 
-        public MovieService(IUnitOfWork unitOfWork, IkafkaSender kafkaSender)
+        public MovieService(IUnitOfWork unitOfWork, IkafkaSender kafkaSender, IConfiguration config)
         {
             _unitOfWork = unitOfWork;
-            /*_config = config;*/
+            _config = config;
             _kafkaSender = kafkaSender;
         }
 
@@ -78,14 +78,13 @@ namespace onboarding.bll
             return _unitOfWork.MovieRepository.GetAll().Where(x => x.ImdbId == imdbId).FirstOrDefault();
         }
 
-        public MovieModel EditMovie(Guid id, MovieModel movie)
+        public async Task EditMovie(Guid id, MovieModel movie)
         {
             bool IsMovieExist = _unitOfWork.MovieRepository.GetAll().Where(x => x.Id == id).Any();
             if (IsMovieExist) {
                 movie.Id = id;
                 _unitOfWork.MovieRepository.Edit(movie);
-                _unitOfWork.Save();
-                return movie;
+                await _unitOfWork.SaveAsync();
             }
             else
             {
