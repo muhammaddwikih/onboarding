@@ -31,7 +31,7 @@ namespace onboarding.api.Movie
                     .ForMember(s => s.NationalId, d => d.MapFrom(t => t.Nation.Id))
                     .ForMember(s => s.Nation, opt => opt.Ignore());
                 m.CreateMap<MovieModel, MovieWithNationalDTO>();
-            });*/
+            }); testing*/
 
             _movieService = movieService;
             _mapper = mapper;
